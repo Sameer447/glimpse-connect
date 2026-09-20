@@ -12,7 +12,7 @@
   "name": "main-owner-direct-push-only",
   "bypass_actors": [
     {
-      "actor_id": 145142282,
+      "actor_id": 83346009,
       "actor_type": "User",
       "bypass_mode": "always"
     }

@@ -5,8 +5,8 @@ from pathlib import Path
 import subprocess
 import sys
 
-REPO = "Sajawal6363/glimpse-connect"
-OWNER_ID = 145142282
+REPO = "Sameer447/glimpse-connect"
+OWNER_ID = 83346009
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -24,7 +24,7 @@ def main():
     repo = api("repos/" + REPO)
     if (user["id"] != OWNER_ID or repo["owner"]["id"] != OWNER_ID
             or repo["owner"]["type"] != "User" or not repo["permissions"]["admin"]):
-        raise RuntimeError("Authenticate gh as repository owner Sajawal6363 with Administration write permission.")
+        raise RuntimeError("Authenticate gh as repository owner Sameer447 with Administration write permission.")
     endpoint = f"repos/{REPO}/rulesets"
     existing = api(endpoint + "?per_page=100")
     for filename in ["main-owner.json", "main-checks.json"]:
