@@ -40,6 +40,11 @@ def main():
             raise RuntimeError("Ruleset verification failed: " + desired["name"])
         if actual.get("bypass_actors", []) != desired["bypass_actors"]:
             raise RuntimeError("Unexpected bypass actors: " + desired["name"])
+        for rule in desired["rules"]:
+            match = next((item for item in actual["rules"] if item["type"] == rule["type"]), None)
+            if match is None or any(match.get("parameters", {}).get(key) != value
+                                    for key, value in rule.get("parameters", {}).items()):
+                raise RuntimeError("Rule verification failed: " + rule["type"])
         print("Active:", actual["name"], result.get("_links", {}).get("html", {}).get("href", ""))
     api(f"repos/{REPO}/actions/permissions/workflow", "PUT", {
         "default_workflow_permissions": "read", "can_approve_pull_request_reviews": False,
@@ -47,6 +52,12 @@ def main():
     api(f"repos/{REPO}/actions/permissions/fork-pr-contributor-approval", "PUT", {
         "approval_policy": "all_external_contributors",
     })
+    api(f"repos/{REPO}", "PATCH", {"security_and_analysis": {
+        "secret_scanning": {"status": "enabled"},
+        "secret_scanning_push_protection": {"status": "enabled"},
+    }})
+    api(f"repos/{REPO}/vulnerability-alerts", "PUT")
+    api(f"repos/{REPO}/automated-security-fixes", "PUT")
     print("Verified owner exception and active main rules. Actions tokens default to read-only.")
 
 
