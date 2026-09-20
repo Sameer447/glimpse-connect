@@ -5,7 +5,8 @@ was verified through GitHub during the audit. The configuration below grants
 only this exact account the direct-push exception. JSON files alone do not
 activate rules; the setup script applies and verifies them through GitHub.
 
-After reviewing and merging the cleanup/CI PR, the owner must run:
+The two rulesets and security settings were activated and read back on
+2026-09-20. To reapply or verify this configuration, the owner can run:
 
 ```sh
 gh auth switch --user Sameer447
@@ -48,8 +49,8 @@ and no `pull_request_target` execution. CODEOWNERS plus enforced owner approval
 protects changes to workflows and the scanner. Repository-local scanners can be
 modified by a PR, so reviewer inspection remains part of the security boundary.
 
-Enable GitHub secret scanning and push protection in the owner's Code security
-settings. Remove unexpected integrations, collaborators, and write-enabled deploy
+The setup script also enables GitHub secret scanning, secret push protection,
+dependency vulnerability alerts, and automated security-fix PRs. Remove unexpected integrations, collaborators, and write-enabled deploy
 keys after reviewing their purpose. Review Vercel/Lovable build credentials and
 logs for any run of an affected revision before rebuilding a clean revision.
 
