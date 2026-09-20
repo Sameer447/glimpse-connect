@@ -70,3 +70,8 @@ violation. A failing or missing CI check must prevent merging a PR.
 References: [ruleset API](https://docs.github.com/en/rest/repos/rules#create-a-repository-ruleset),
 [available rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets),
 [secure Actions use](https://docs.github.com/en/actions/reference/security/secure-use).
+
+Use npm and the committed `package-lock.json` for reproducible installs. The
+obsolete Bun lockfiles were removed because they pinned vulnerable versions.
+Run `npm ci --ignore-scripts`; do not regenerate a different package-manager
+lockfile from the old dependency tree.
