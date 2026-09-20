@@ -1,14 +1,14 @@
 # Activate GitHub protection
 
-The repository is owned by the personal account `Sajawal6363` (ID `145142282`).
-The audit session authenticated as `Sameer447`, with push permission and
-`admin: false`. GitHub rejected creation of the owner rule with HTTP 404.
-No branch rules were active when inspected. These files do not activate rules.
+The repository is now owned by `Sameer447` (ID `83346009`). The owner transfer
+was verified through GitHub during the audit. The configuration below grants
+only this exact account the direct-push exception. JSON files alone do not
+activate rules; the setup script applies and verifies them through GitHub.
 
 After reviewing and merging the cleanup/CI PR, the owner must run:
 
 ```sh
-gh auth switch --user Sajawal6363
+gh auth switch --user Sameer447
 python3 scripts/security/configure_github.py
 ```
 
@@ -19,7 +19,7 @@ write permissions are required for these API changes.
 The script checks the authenticated account and repository ownership, updates
 only the two named rulesets, and reads them back. Other rulesets are preserved.
 Alternatively import the two JSON files from `.github/rulesets/` in
-[repository rules settings](https://github.com/Sajawal6363/glimpse-connect/settings/rules).
+[repository rules settings](https://github.com/Sameer447/glimpse-connect/settings/rules).
 
 ## Resulting policy
 
@@ -56,9 +56,9 @@ logs for any run of an affected revision before rebuilding a clean revision.
 ## Verification
 
 ```sh
-gh api repos/Sajawal6363/glimpse-connect/rules/branches/main
-gh api repos/Sajawal6363/glimpse-connect/actions/permissions/workflow
-gh api repos/Sajawal6363/glimpse-connect/actions/permissions/fork-pr-contributor-approval
+gh api repos/Sameer447/glimpse-connect/rules/branches/main
+gh api repos/Sameer447/glimpse-connect/actions/permissions/workflow
+gh api repos/Sameer447/glimpse-connect/actions/permissions/fork-pr-contributor-approval
 ```
 
 Check the owner ID is the only bypass on the PR rule and there are no bypasses on
